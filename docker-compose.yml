@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/debug/node/Dockerfile
+  #   image: api
+  #   restart: on-failure
+  #   container_name: api
+  #   ports:
+  #     - 9000:9001
+  #   volumes:
+  #     - ./:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   env_file:
+  #     - .env
+  #   networks:
+  #     - backend
+  #   stdin_open: true
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    volumes:
+      - ./data/mongo_db:/data/db
+    ports:
+      - '27017:27017'
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  data:
+    driver: local
